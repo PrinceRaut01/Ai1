@@ -3,9 +3,7 @@ import streamlit as st
 from openai import OpenAI
 from dotenv import load_dotenv
 
-# =========================
 # LOAD ENV
-# =========================
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
@@ -17,9 +15,7 @@ client = OpenAI(api_key=OPENAI_API_KEY)
 
 MODEL = "gpt-4o-mini"
 
-# =========================
 # PAGE CONFIG
-# =========================
 st.set_page_config(
     page_title="Bay_max",
     page_icon="Bay_max",
@@ -28,26 +24,22 @@ st.set_page_config(
 
 st.title("Bay_max")
 
-# =========================
+
 # CHAT MEMORY (LIKE CHATGPT)
-# =========================
 if "messages" not in st.session_state:
     st.session_state.messages = [
         {"role": "system", "content": "You are ChatGPT, a helpful assistant."}
     ]
 
-# =========================
 # DISPLAY CHAT
-# =========================
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.chat_message("user").write(msg["content"])
     elif msg["role"] == "assistant":
         st.chat_message("assistant").write(msg["content"])
 
-# =========================
+
 # USER INPUT
-# =========================
 user_input = st.chat_input("Send a message...")
 
 if user_input:
